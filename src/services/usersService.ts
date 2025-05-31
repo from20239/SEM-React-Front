@@ -40,6 +40,28 @@ export const LogIn = async (email: string, password: string): Promise<User> => {
     }
 };
 
+// 获取指定 ID 的用户
+export const getUserById = async (id: string): Promise<User> => {
+    try {
+        const response = await axios.get<User>(`http://localhost:9000/api/Users/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching user by ID:', error);
+        throw error;
+    }
+};
+
+// 更新用户信息
+export const updateUser = async (id: string, updatedUser: Partial<User>): Promise<User> => {
+    try {
+        const response = await axios.put<User>(`http://localhost:9000/api/Users/${id}`, updatedUser);
+        return response.data;
+    } catch (error) {
+        console.error('Error updating user:', error);
+        throw error;
+    }
+};
+
 /* 
 //PODEM FERHO COM UNA PROMESA
 export const addUser = async (newUser: User): Promise<User> => {
